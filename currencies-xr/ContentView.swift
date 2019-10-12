@@ -8,13 +8,6 @@
 
 import SwiftUI
 
-private let dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .medium
-    return dateFormatter
-}()
-
 struct ContentView: View {
     @Environment(\.managedObjectContext)
     var viewContext   
@@ -22,54 +15,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ExRateListView()
-                .navigationBarItems(
-                    leading: EditButton(),
-                    trailing: Button(
-                        action: {
-                            print(self.viewContext)
-                            withAnimation { Event.create(in: self.viewContext) }
-                    }
-                    ) { 
-                        Image(systemName: "plus")
-                    }
-            )
         }
     }
 }
-
-struct MasterView: View {
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Event.timestamp, ascending: true)], 
-        animation: .default)
-    var events: FetchedResults<Event>
-
-    @Environment(\.managedObjectContext)
-    var viewContext
-
-    var body: some View {
-        List {
-            ForEach(events, id: \.self) { event in
-                NavigationLink(
-                    destination: DetailView(event: event)
-                ) {
-                    Text("\(event.timestamp!, formatter: dateFormatter)")
-                }
-            }.onDelete { indices in
-                self.events.delete(at: indices, from: self.viewContext)
-            }
-        }
-    }
-}
-
-struct DetailView: View {
-    @ObservedObject var event: Event
-
-    var body: some View {
-        Text("\(event.timestamp!, formatter: dateFormatter)")
-            .navigationBarTitle(Text("Detail"))
-    }
-}
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

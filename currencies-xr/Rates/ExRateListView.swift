@@ -31,11 +31,17 @@ struct ExRateListView: View {
                         .padding(16)
                     Text("button_title_add_add_currency_pair")
                 }
-                List(currencyPairs) { _ in
-                    Text("ko")
+                List {
+                    ForEach(self.currencyPairs) {
+                        CurrencyPairRowView(model: $0, value: 1)
+                    }.onDelete { indices in
+                        self.currencyPairs.delete(at: indices, from: self.viewContext)
+                    }
                 }
             } else {
-                Button(action: addCurrency) {
+                Button(action: {
+                    self.isCurrencyPickerPresented.toggle()
+                }) {
                     VStack {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
@@ -48,17 +54,13 @@ struct ExRateListView: View {
                     .foregroundColor(.gray)
             }
         }
-    
+
         .navigationBarTitle("Rates & converter", displayMode: .inline)
         .sheet(isPresented: self.$isCurrencyPickerPresented) {
             NavigationView {
                 CurrenciesListView(model: CurrenciesListViewModel(), isPresented: self.$isCurrencyPickerPresented).environment(\.managedObjectContext, self.viewContext)
             }
         }
-    }
-    
-    private func addCurrency() {
-        isCurrencyPickerPresented.toggle()
     }
 }
 

@@ -16,7 +16,7 @@ struct CurrencyPairRowView: View {
     
     var body: some View {
         HStack {
-            VStack {
+            VStack(alignment: .leading) {
                 Text(model.firstCurrencyTitle(with: value))
                     .font(.title)
                 Text(model.firstCurrencySubtitle)
@@ -24,7 +24,7 @@ struct CurrencyPairRowView: View {
                     .foregroundColor(.gray)
             }
             Spacer()
-            VStack {
+            VStack(alignment: .trailing) {
                 Text(model.secondCurrencyTitle(with: value))
                     .font(.title)
                 Text(model.secondCurrencySubtitle)

@@ -69,11 +69,13 @@ struct CurrenciesListView: View {
                     }
                 }, label: {
                     HStack {
-                        Image(currency.name ?? "NO")
+                        Image(currency.name!)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 44, height: 44, alignment: .center)
-                        Text(currency.name ?? "No Currency")
+                            .frame(width: 24, height: 24, alignment: .center)
+                        self.img()
+                        Text(currency.name!)
+                        Text(currency.name!.localizedCurrencyName ?? "")
                     }
                 })
             }
@@ -85,6 +87,15 @@ struct CurrenciesListView: View {
             .onAppear {
                 self.loadCurrencies()
         }
+    }
+    
+    private func img() -> Image {
+        guard let img = UIImage(named: "AUD") else {
+            fatalError("Unable to load image")
+        }
+        let rr = Image("AUD")
+        let r = Image(uiImage: img)
+        return r
     }
     
     private func currenciesListView() -> CurrenciesListView {
