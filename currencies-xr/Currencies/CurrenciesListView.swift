@@ -73,7 +73,6 @@ struct CurrenciesListView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24, height: 24, alignment: .center)
-                        self.img()
                         Text(currency.name!)
                         Text(currency.name!.localizedCurrencyName ?? "")
                     }
