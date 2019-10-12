@@ -23,6 +23,7 @@
 		3058F5782351708F008088B9 /* currencies_xrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F5772351708F008088B9 /* currencies_xrTests.swift */; };
 		3058F5832351708F008088B9 /* currencies_xrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F5822351708F008088B9 /* currencies_xrUITests.swift */; };
 		3058F591235172E1008088B9 /* ExRateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F590235172E1008088B9 /* ExRateListView.swift */; };
+		305A4ADD235215DD00DC2121 /* CurrencyPair+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4ADC235215DD00DC2121 /* CurrencyPair+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		3058F5822351708F008088B9 /* currencies_xrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currencies_xrUITests.swift; sourceTree = "<group>"; };
 		3058F5842351708F008088B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3058F590235172E1008088B9 /* ExRateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExRateListView.swift; sourceTree = "<group>"; };
+		305A4ADC235215DD00DC2121 /* CurrencyPair+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyPair+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				30043C6E235186A2001A31D0 /* Bundle+extension.swift */,
+				305A4ADC235215DD00DC2121 /* CurrencyPair+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				30043C6923518520001A31D0 /* CoreDataManager.swift in Sources */,
 				3058F55C2351708D008088B9 /* AppDelegate.swift in Sources */,
 				3058F5612351708D008088B9 /* SceneDelegate.swift in Sources */,
+				305A4ADD235215DD00DC2121 /* CurrencyPair+extension.swift in Sources */,
 				3058F591235172E1008088B9 /* ExRateListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

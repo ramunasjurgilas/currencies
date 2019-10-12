@@ -26,12 +26,19 @@ class CurrenciesListViewModel {
         self.firstCurrency = firstCurrency
     }
     
-    func save(currency: String?) {
+    func set(currency: String?) {
         if firstCurrency == nil {
             firstCurrency = currency
         } else {
             secondCurrency = currency
         }
+    }
+    
+    func save(in managedObjectContext: NSManagedObjectContext) {
+        guard let first = firstCurrency, let second = secondCurrency else { return }
+        let pair = first + second
+        
+        CurrencyPair.create(in: managedObjectContext, pair: pair)
     }
 }
 
@@ -53,8 +60,9 @@ struct CurrenciesListView: View {
         List {
             ForEach(currencies, id: \.self) { currency in
                 Button(action: {
-                    self.model.save(currency: currency.name)
+                    self.model.set(currency: currency.name)
                     if self.model.isSetupDone {
+                        self.model.save(in: self.viewContext)
                         self.isPresented.toggle()
                     } else {
                         self.shouldPresent2ndCurrency.toggle()

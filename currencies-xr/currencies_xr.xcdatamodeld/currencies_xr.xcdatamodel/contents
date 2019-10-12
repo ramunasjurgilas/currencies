@@ -3,12 +3,17 @@
     <entity name="Currency" representedClassName="Currency" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
     </entity>
+    <entity name="CurrencyPair" representedClassName="CurrencyPair" syncable="YES" codeGenerationType="class">
+        <attribute name="added" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="pair" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Event" representedClassName="Event" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date"/>
         <userInfo/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
         <element name="Currency" positionX="261" positionY="198" width="128" height="58"/>
+        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="CurrencyPair" positionX="261" positionY="198" width="128" height="73"/>
     </elements>
 </model>

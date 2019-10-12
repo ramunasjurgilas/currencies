@@ -28,12 +28,11 @@ struct ContentView: View {
                         action: {
                             print(self.viewContext)
                             withAnimation { Event.create(in: self.viewContext) }
-                        }
+                    }
                     ) { 
                         Image(systemName: "plus")
                     }
-                )
-                .navigationBarTitle(Text("Detail"))
+            )
         }
     }
 }
