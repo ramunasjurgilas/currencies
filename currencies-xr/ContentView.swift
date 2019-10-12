@@ -21,7 +21,7 @@ struct ContentView: View {
  
     var body: some View {
         NavigationView {
-            MasterView()
+            ExRateListView()
                 .navigationBarTitle(Text("Master"))
                 .navigationBarItems(
                     leading: EditButton(),

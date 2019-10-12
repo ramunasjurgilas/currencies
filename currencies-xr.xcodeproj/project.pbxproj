@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30043C6523517752001A31D0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30043C6223517752001A31D0 /* Localizable.strings */; };
 		3058F55C2351708D008088B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F55B2351708D008088B9 /* AppDelegate.swift */; };
 		3058F55F2351708D008088B9 /* currencies_xr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3058F55D2351708D008088B9 /* currencies_xr.xcdatamodeld */; };
 		3058F5612351708D008088B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F5602351708D008088B9 /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 		3058F56D2351708E008088B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3058F56B2351708E008088B9 /* LaunchScreen.storyboard */; };
 		3058F5782351708F008088B9 /* currencies_xrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F5772351708F008088B9 /* currencies_xrTests.swift */; };
 		3058F5832351708F008088B9 /* currencies_xrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F5822351708F008088B9 /* currencies_xrUITests.swift */; };
+		3058F591235172E1008088B9 /* ExRateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3058F590235172E1008088B9 /* ExRateListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30043C6323517752001A31D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		30043C6423517752001A31D0 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3058F5582351708D008088B9 /* currencies-xr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "currencies-xr.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3058F55B2351708D008088B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3058F55E2351708D008088B9 /* currencies_xr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = currencies_xr.xcdatamodel; sourceTree = "<group>"; };
@@ -53,6 +57,7 @@
 		3058F57E2351708F008088B9 /* currencies-xrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "currencies-xrUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3058F5822351708F008088B9 /* currencies_xrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currencies_xrUITests.swift; sourceTree = "<group>"; };
 		3058F5842351708F008088B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3058F590235172E1008088B9 /* ExRateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExRateListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30043C6123517752001A31D0 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				30043C6223517752001A31D0 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		3058F54F2351708D008088B9 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +116,7 @@
 		3058F55A2351708D008088B9 /* currencies-xr */ = {
 			isa = PBXGroup;
 			children = (
+				30043C6123517752001A31D0 /* Localization */,
 				3058F55B2351708D008088B9 /* AppDelegate.swift */,
 				3058F5602351708D008088B9 /* SceneDelegate.swift */,
 				3058F5622351708D008088B9 /* Event.swift */,
@@ -112,6 +126,7 @@
 				3058F56E2351708E008088B9 /* Info.plist */,
 				3058F55D2351708D008088B9 /* currencies_xr.xcdatamodeld */,
 				3058F5682351708E008088B9 /* Preview Content */,
+				3058F590235172E1008088B9 /* ExRateListView.swift */,
 			);
 			path = "currencies-xr";
 			sourceTree = "<group>";
@@ -228,6 +243,7 @@
 			knownRegions = (
 				en,
 				Base,
+				lt,
 			);
 			mainGroup = 3058F54F2351708D008088B9;
 			productRefGroup = 3058F5592351708D008088B9 /* Products */;
@@ -247,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3058F56D2351708E008088B9 /* LaunchScreen.storyboard in Resources */,
+				30043C6523517752001A31D0 /* Localizable.strings in Resources */,
 				3058F56A2351708E008088B9 /* Preview Assets.xcassets in Resources */,
 				3058F5672351708E008088B9 /* Assets.xcassets in Resources */,
 			);
@@ -278,6 +295,7 @@
 				3058F55F2351708D008088B9 /* currencies_xr.xcdatamodeld in Sources */,
 				3058F55C2351708D008088B9 /* AppDelegate.swift in Sources */,
 				3058F5612351708D008088B9 /* SceneDelegate.swift in Sources */,
+				3058F591235172E1008088B9 /* ExRateListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +331,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		30043C6223517752001A31D0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30043C6323517752001A31D0 /* en */,
+				30043C6423517752001A31D0 /* lt */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		3058F56B2351708E008088B9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -328,6 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -388,6 +416,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
