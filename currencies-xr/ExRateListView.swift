@@ -49,7 +49,7 @@ struct ExRateListView: View {
             }
         }
     
-        .navigationBarTitle("ExRates", displayMode: .inline)
+        .navigationBarTitle("Rates & converter", displayMode: .inline)
         .sheet(isPresented: self.$isCurrencyPickerPresented) {
             NavigationView {
                 CurrenciesListView(model: CurrenciesListViewModel(), isPresented: self.$isCurrencyPickerPresented).environment(\.managedObjectContext, self.viewContext)

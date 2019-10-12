@@ -8,10 +8,14 @@
 
 import CoreData
 
+extension CurrencyPair: Identifiable { }
+
 extension CurrencyPair {
-    static func create(in managedObjectContext: NSManagedObjectContext, pair: String) {
+    static func create(in managedObjectContext: NSManagedObjectContext, pair: String, exchangeRate: Double = 0) {
         let newPair = self.init(context: managedObjectContext)
         newPair.pair = pair
+        newPair.added = Date()
+        newPair.exchangeRate = exchangeRate
         
         do {
             try  managedObjectContext.save()
@@ -24,6 +28,41 @@ extension CurrencyPair {
     }
 }
 
-extension CurrencyPair: Identifiable {
+extension CurrencyPair {
+    var firstCurrency: String {
+        // Exclamation mark, because in CoreData this field must be set.
+        return String(pair!.prefix(3))
+    }
+
+    var secondCurrency: String {
+        // Exclamation mark, because in CoreData this field must be set.
+        return String(pair!.suffix(3))
+    }
     
+    var firstCurrencySubtitle: String {
+        return firstCurrency.localizedCurrencyName ?? "NA"
+    }
+    
+    var secondCurrencySubtitle: String {
+        return (secondCurrency.localizedCurrencyName ?? "") + " · " + secondCurrency
+    }
+    
+    func firstCurrencyTitle(with value: Double) -> String {
+        let formatter = NumberFormatter()
+        let amount = formatter.string(from: NSNumber(value: value)) ?? "NA"
+        return "\(amount) \(firstCurrency)"
+    }
+    
+    func secondCurrencyTitle(with value: Double) -> String {
+        let afterExchange = valueAfterExchange(with: value)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: afterExchange)) ?? "NA"
+    }
+
+    func valueAfterExchange(with value: Double) -> Double {
+        return value * exchangeRate
+    }
 }
