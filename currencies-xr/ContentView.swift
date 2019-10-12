@@ -18,24 +18,23 @@ private let dateFormatter: DateFormatter = {
 struct ContentView: View {
     @Environment(\.managedObjectContext)
     var viewContext   
- 
+
     var body: some View {
         NavigationView {
             ExRateListView()
-                .navigationBarTitle(Text("Master"))
                 .navigationBarItems(
                     leading: EditButton(),
                     trailing: Button(
                         action: {
+                            print(self.viewContext)
                             withAnimation { Event.create(in: self.viewContext) }
                         }
                     ) { 
                         Image(systemName: "plus")
                     }
                 )
-            Text("Detail view content goes here")
                 .navigationBarTitle(Text("Detail"))
-        }.navigationViewStyle(DoubleColumnNavigationViewStyle())
+        }
     }
 }
 
