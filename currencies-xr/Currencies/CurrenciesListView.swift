@@ -40,6 +40,10 @@ class CurrenciesListViewModel {
         
         CurrencyPair.create(in: managedObjectContext, pair: pair)
     }
+    
+    func shouldDisableButtonFor(currency: String) -> Bool {
+        return firstCurrency == currency
+    }
 }
 
 struct CurrenciesListView: View {
@@ -77,6 +81,7 @@ struct CurrenciesListView: View {
                         Text(currency.name!.localizedCurrencyName ?? "")
                     }
                 })
+                    .disabled(self.model.shouldDisableButtonFor(currency: currency.name!))
             }
         }
         .navigationBarItems(leading: NavigationLink(destination: currenciesListView(), isActive: self.$shouldPresent2ndCurrency) {
@@ -87,16 +92,7 @@ struct CurrenciesListView: View {
                 self.loadCurrencies()
         }
     }
-    
-    private func img() -> Image {
-        guard let img = UIImage(named: "AUD") else {
-            fatalError("Unable to load image")
-        }
-        let rr = Image("AUD")
-        let r = Image(uiImage: img)
-        return r
-    }
-    
+
     private func currenciesListView() -> CurrenciesListView {
         let model = CurrenciesListViewModel(firstCurrency: self.model.firstCurrency)
         return CurrenciesListView(model: model, isPresented: self.$isPresented)
