@@ -9,7 +9,7 @@
 import XCTest
 
 class RatesRequestTests: XCTestCase {
-    
+
     var mockDataFail: Data { Data("koko".utf8) }
     var mockDataOk: Data {
         Data("""

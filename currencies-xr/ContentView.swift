@@ -15,6 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ExRateListView()
+                .navigationBarTitle("Rates & converter", displayMode: .inline)
         }
     }
 }

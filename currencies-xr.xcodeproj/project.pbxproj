@@ -32,8 +32,6 @@
 		305A4AEA23524AB100DC2121 /* CoreDataTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4AE923524AB100DC2121 /* CoreDataTestsHelper.swift */; };
 		305A4AEE2352501F00DC2121 /* CurrenciesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30043C6623517F5C001A31D0 /* CurrenciesListView.swift */; };
 		305A4AEF235253DD00DC2121 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 30043C6B23518558001A31D0 /* currencies.json */; };
-		305A4AF223525C6600DC2121 /* RatesObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4AF123525C6600DC2121 /* RatesObtainer.swift */; };
-		305A4AF323525C6600DC2121 /* RatesObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4AF123525C6600DC2121 /* RatesObtainer.swift */; };
 		305A4AF523525EED00DC2121 /* RatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4AF423525EED00DC2121 /* RatesRequest.swift */; };
 		305A4AF623525EED00DC2121 /* RatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4AF423525EED00DC2121 /* RatesRequest.swift */; };
 		305A4AF8235261F100DC2121 /* RatesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A4AF7235261F100DC2121 /* RatesRequestTests.swift */; };
@@ -85,7 +83,6 @@
 		305A4AE123522A0900DC2121 /* CurrencyPair+extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyPair+extension+Tests.swift"; sourceTree = "<group>"; };
 		305A4AE6235241F500DC2121 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		305A4AE923524AB100DC2121 /* CoreDataTestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTestsHelper.swift; sourceTree = "<group>"; };
-		305A4AF123525C6600DC2121 /* RatesObtainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesObtainer.swift; sourceTree = "<group>"; };
 		305A4AF423525EED00DC2121 /* RatesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesRequest.swift; sourceTree = "<group>"; };
 		305A4AF7235261F100DC2121 /* RatesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesRequestTests.swift; sourceTree = "<group>"; };
 		305A4AF92352635D00DC2121 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
@@ -233,7 +230,6 @@
 		305A4AF023525C2E00DC2121 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				305A4AF123525C6600DC2121 /* RatesObtainer.swift */,
 				305A4AF423525EED00DC2121 /* RatesRequest.swift */,
 			);
 			path = Networking;
@@ -374,7 +370,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				305A4AF223525C6600DC2121 /* RatesObtainer.swift in Sources */,
 				305A4AF523525EED00DC2121 /* RatesRequest.swift in Sources */,
 				305A4AE0235224EF00DC2121 /* CurrencyPairRowView.swift in Sources */,
 				30043C6F235186A2001A31D0 /* Bundle+extension.swift in Sources */,
@@ -405,7 +400,6 @@
 				305A4AE323522A6600DC2121 /* currencies_xr.xcdatamodeld in Sources */,
 				305A4AF8235261F100DC2121 /* RatesRequestTests.swift in Sources */,
 				305A4AEA23524AB100DC2121 /* CoreDataTestsHelper.swift in Sources */,
-				305A4AF323525C6600DC2121 /* RatesObtainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,6 +41,25 @@ extension Collection where Element == CurrencyPair, Index == Int {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+    
+    func ratesUrl() -> URL? {
+        let pairsJoined = Set<String>(self.compactMap { $0.pair }).joined(separator: "&pairs=")
+        
+        let result = "https://europe-west1-revolut-230009.cloudfunctions.net/revolut-ios?pairs=" + pairsJoined
+        
+        return URL(string: result)
+    }
+
+    func update(rates: [String: Double], from managedObjectContext: NSManagedObjectContext) {
+        
+        self.forEach {
+            if let exchangeRate = rates[$0.pair!] {
+                $0.exchangeRate = exchangeRate
+            }
+        }
+        
+        try? managedObjectContext.save()
+    }
 }
 
 extension CurrencyPair {

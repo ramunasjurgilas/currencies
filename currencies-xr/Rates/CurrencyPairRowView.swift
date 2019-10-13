@@ -13,6 +13,7 @@ struct CurrencyPairRowView: View {
     
     let model: CurrencyPair
     let value: Double
+    let exRate: Double
     
     var body: some View {
         HStack {
@@ -40,7 +41,7 @@ struct CurrencyPairRowView_Previews: PreviewProvider {
 
     static var previews: some View {
 
-        CurrencyPairRowView(model: CurrencyPairRowView_Previews.currencyPair(), value: 1500)
+        CurrencyPairRowView(model: CurrencyPairRowView_Previews.currencyPair(), value: 1500, exRate: 12)
     }
     
     static func currencyPair() -> CurrencyPair {
