@@ -10,7 +10,7 @@ import Foundation
 
 extension Bundle {
 
-    func decode<T>(_ type: T.Type,forResource name: String?, ofType ext: String?) -> T? where T : Decodable {
+    func decode<T>(_ type: T.Type, forResource name: String?, ofType ext: String?) -> T? where T : Decodable {
         
         if let path = Bundle.main.path(forResource: name, ofType: ext),
             let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) {
