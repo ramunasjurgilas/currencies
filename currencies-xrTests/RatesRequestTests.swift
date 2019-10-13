@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import currencies_xr
 
 class RatesRequestTests: XCTestCase {
 

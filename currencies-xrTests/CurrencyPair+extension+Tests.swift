@@ -8,6 +8,7 @@
 
 import XCTest
 import CoreData
+@testable import currencies_xr
 
 class CurrencyPairTests: XCTestCase {
 
