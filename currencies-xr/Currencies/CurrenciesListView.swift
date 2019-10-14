@@ -42,7 +42,9 @@ struct CurrenciesListView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24, height: 24, alignment: .center)
                         Text(currency.name!)
+                            .foregroundColor(.gray)
                         Text(currency.name!.localizedCurrencyName ?? "")
+
                     }
                 })
                     .accessibility(identifier: currency.name!)
@@ -86,11 +88,9 @@ extension Currency {
     }
 }
 
-#if DEBUG
 struct CurrenciesListView_Previews: PreviewProvider {
     static var model = CurrenciesListViewModel()
     static var previews: some View {
         CurrenciesListView(model: model, isPresented: .constant(false))
     }
 }
-#endif
