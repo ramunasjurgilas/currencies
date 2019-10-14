@@ -37,7 +37,7 @@ struct CurrenciesListView: View {
                     }
                 }, label: {
                     HStack {
-                        Image(currency.name!)
+                        Image(currency.name!.lowercased())
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24, height: 24, alignment: .center)

@@ -91,19 +91,21 @@ struct ExRateListView: View {
                     self.model.stop()
                 }
             } else {
-                Button(action: {
-                    self.isCurrencyPickerPresented.toggle()
-                }) {
-                    VStack {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 44, height: 44, alignment: .center)
-                        Text("button_title_add_add_currency_pair")
+                VStack(alignment: .center) {
+                    Button(action: {
+                        self.isCurrencyPickerPresented.toggle()
+                    }) {
+                        VStack {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .frame(width: 44, height: 44, alignment: .center)
+                            Text("button_title_add_add_currency_pair")
+                        }
                     }
+                    Text("text_info_choose_currency")
+                        .font(.caption)
+                        .foregroundColor(.gray)
                 }
-                Text("text_info_choose_currency")
-                    .font(.caption)
-                    .foregroundColor(.gray)
             }
         }
 
