@@ -82,6 +82,8 @@ extension CurrencyPair {
     
     func firstCurrencyTitle(with value: Double) -> String {
         let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
         let amount = formatter.string(from: NSNumber(value: value)) ?? "NA"
         return "\(amount) \(firstCurrency)"
     }
