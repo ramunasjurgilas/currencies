@@ -48,17 +48,12 @@ class CoreDataTestsHelper {
     func clean() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CurrencyPair.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        let ddd = try? persistentContainer.viewContext.fetch(fetchRequest)
         _ = try? persistentContainer.viewContext.execute(deleteRequest)
         do {
-        try persistentContainer.viewContext.save()
+            try persistentContainer.viewContext.save()
         } catch let error {
             print("Error on cleaning", error)
         }
-
-//        let fetchRequest: NSFetchRequest<CurrencyPair> = CurrencyPair.fetchRequest()
-        let dd = try? persistentContainer.viewContext.fetch(fetchRequest)
-
     }
 
     func clearCoreDataStore() {
