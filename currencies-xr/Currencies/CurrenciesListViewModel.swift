@@ -8,13 +8,14 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class CurrenciesListViewModel {
     var firstCurrency: String?
     var secondCurrency: String?
 
     var title: String {
-        firstCurrency == nil ? "1st Currency" : "2nd Currency"
+        NSLocalizedString(firstCurrency == nil ? "title_1st_currency" : "title_2nd_currency", comment: "")
     }
 
     var isSetupDone: Bool {

@@ -1,2 +1,6 @@
 "button_title_add_add_currency_pair" = "Add currency pair";
 "text_info_choose_currency" = "Choose a currency pair to compare their live rates";
+"placeholder_enter_amount" = "Enter amount to convert";
+"title_rate_converter" = "Rates & converter";
+"title_1st_currency" = "1st Currency";
+"title_2nd_currency" = "2nd Currency";

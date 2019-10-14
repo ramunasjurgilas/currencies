@@ -16,11 +16,12 @@ struct ExRateListView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \CurrencyPair.added, ascending: true)],
         animation: .default)
+
     var currencyPairs: FetchedResults<CurrencyPair>
-    
-    @State var isCurrencyPickerPresented: Bool = false
-    
     let model = ExRateListViewModel()
+
+    @State var isCurrencyPickerPresented: Bool = false
+    @State var amount: String = ""
     
     var body: some View {
         NavigationView {
@@ -36,18 +37,28 @@ struct ExRateListView: View {
                             .padding(16)
                         Text("button_title_add_add_currency_pair")
                     }
+                    VStack(alignment: .center) {
+                        TextField("placeholder_enter_amount", text: self.$amount)
+                            .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.center)
+                    }
+
+
                     List {
                         ForEach(self.currencyPairs) { pair in
-                            CurrencyPairRowView(model: pair, value: 1, exRate: pair.exchangeRate)
+                            CurrencyPairRowView(model: pair, value: self.amountToConvert(), exRate: pair.exchangeRate)
                         }.onDelete { indices in
                             self.currencyPairs.delete(at: indices, from: self.viewContext)
                         }
-                    }
+                        }
                     .onAppear {
                         self.model.start()
                     }
                     .onDisappear {
                         self.model.stop()
+                    }
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
                 } else {
                     VStack(alignment: .center) {
@@ -68,7 +79,7 @@ struct ExRateListView: View {
                 }
             }
             .navigationBarItems(leading: EditButton())
-            .navigationBarTitle("Rates & converter", displayMode: .inline)
+            .navigationBarTitle("title_rate_converter", displayMode: .inline)
             .sheet(isPresented: self.$isCurrencyPickerPresented) {
                 NavigationView {
                     CurrenciesListView(model: CurrenciesListViewModel(), isPresented: self.$isCurrencyPickerPresented).environment(\.managedObjectContext, self.viewContext)
@@ -79,7 +90,10 @@ struct ExRateListView: View {
                 }
             }
         }
-        .navigationBarTitle("Rates & converter", displayMode: .inline)
+    }
+
+    private func amountToConvert() -> Double {
+        return Double(amount) ?? 1
     }
 }
 
