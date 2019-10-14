@@ -45,6 +45,7 @@ struct CurrenciesListView: View {
                         Text(currency.name!.localizedCurrencyName ?? "")
                     }
                 })
+                    .accessibility(identifier: currency.name!)
                     .disabled(self.model.shouldDisableButtonFor(currency: currency.name!))
             }
         }
@@ -70,11 +71,7 @@ struct CurrenciesListView: View {
             currencies?.forEach { name in
                 Currency.create(in: self.viewContext, name: name)
             }
-            do {
-                try self.viewContext.save()
-            } catch let error {
-                print(error)
-            }
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
     }
 }
@@ -85,20 +82,15 @@ extension Currency {
         let newEvent = self.init(context: managedObjectContext)
         newEvent.name = name
         
-        do {
-            try  managedObjectContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
 }
 
+#if DEBUG
 struct CurrenciesListView_Previews: PreviewProvider {
     static var model = CurrenciesListViewModel()
     static var previews: some View {
         CurrenciesListView(model: model, isPresented: .constant(false))
     }
 }
+#endif

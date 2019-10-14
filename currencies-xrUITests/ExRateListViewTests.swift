@@ -21,82 +21,104 @@ class ExRateListViewTests: XCTestCase {
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testWhenCurrencyPariesExist() {
+        deleteAllCellsFromTable()
 
     }
 
-    func testWhenNoCurrencyPariesEntered() {
-    //    CoreDataTestsHelper.shared.clearCoreDataStore()
+    func testAddCurrencyPairWhenListEmptyExistAndCheckLabels() {
         let app = XCUIApplication()
-
-        XCTAssertEqual(app.buttons["Add currency pair"].value as! String, "0")
-        let addButton = app.buttons["Add currency pair"]
-        addButton.tap()
-        XCTAssertEqual(app.buttons["Add currency pair"].value as! String, "1")
         let tablesQuery = app.tables
-        tablesQuery/*@START_MENU_TOKEN@*/.buttons["AUD\nAustralian Dollar"]/*[[".cells.buttons[\"AUD\\nAustralian Dollar\"]",".buttons[\"AUD\\nAustralian Dollar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        tablesQuery/*@START_MENU_TOKEN@*/.buttons["CHF\nSwiss Franc"]/*[[".cells.buttons[\"CHF\\nSwiss Franc\"]",".buttons[\"CHF\\nSwiss Franc\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .table).element.swipeUp()
 
+        app.buttons["Add currency pair"].tap()
 
+        tablesQuery.buttons["AUD"].tap()
+        tablesQuery.buttons["BGN"].tap()
+
+        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+
+        // For some reason needs to do expectation with delay.
+        let predicate = NSPredicate(format: "isHittable == true")
+        expectation(for: predicate, evaluatedWith: cell.staticTexts["1 AUD"])
+        waitForExpectations(timeout: 2)
+
+        XCTAssert(cell.staticTexts["1 AUD"].isHittable)
+        XCTAssert(cell.staticTexts["Australian Dollar"].isHittable)
+        XCTAssert(cell.staticTexts["Bulgarian Lev · BGN"].isHittable)
     }
 
-    func testDelete() {
+    func testAddCurrencyPairWhenListNoneEmptyExist() {
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
 
+        app.buttons["Add currency pair"].tap()
+
+        tablesQuery.buttons["AUD"].tap()
+        tablesQuery.buttons["BGN"].tap()
+
+        app.buttons["Add currency pair"].tap()
+
+        tablesQuery.buttons["GBP"].tap()
+        tablesQuery.buttons["EUR"].tap()
+
+        // For some reason needs to do expectation with delay.
+        let predicate = NSPredicate(format: "count == 2")
+        expectation(for: predicate, evaluatedWith: app.tables.children(matching: .cell))
+        waitForExpectations(timeout: 2)
+
+        XCTAssertEqual(app.tables.children(matching: .cell).count, 2)
     }
 
+    func testDeleteCurrencyPairs() {
+        let app = XCUIApplication()
+        let tablesQuery = XCUIApplication().tables
 
+        app.buttons["Add currency pair"].tap()
 
-}
+        tablesQuery.buttons["AUD"].tap()
+        tablesQuery.buttons["BGN"].tap()
 
+        app.navigationBars["Rates & converter"].buttons["Edit"].tap()
 
-class CoreDataTestsHelper {
-    static let shared = CoreDataTestsHelper()
+        while app.tables.children(matching: .cell).count > 0 {
+            let deleteButton = tablesQuery.children(matching: .cell).element(boundBy: 0).buttons["Delete "]
 
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "currencies_xr")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+            print("👍", deleteButton.isEnabled)
+            deleteButton.tap()
 
-    func currencyPairs() -> [CurrencyPair]? {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyPair")
-      //  let fetchRequest: NSFetchRequest<CurrencyPair> = CurrencyPair.fetchRequest()
-        return try? persistentContainer.viewContext.fetch(fetchRequest) as! [CurrencyPair]
+            let deleteButton2 = tablesQuery.children(matching: .cell).element(boundBy: 0).buttons["trailing0"]
+            deleteButton2.tap()
+        }
+
+        app.navigationBars["Rates & converter"].buttons["Done"].tap()
+
+        XCTAssert(app.staticTexts["Choose a currency pair to compare their live rates"].isHittable)
     }
 
-//    func clean() {
-//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CurrencyPair.fetchRequest()
-//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//        _ = try? persistentContainer.viewContext.execute(deleteRequest)
-//        do {
-//            try persistentContainer.viewContext.save()
-//        } catch let error {
-//            print("Error on cleaning", error)
-//        }
-//    }
-//
-//    func clearCoreDataStore() {
-//        let entities = persistentContainer.managedObjectModel.entities
-//        for entity in entities {
-//            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-//            let deleteReqest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//            do {
-//                try persistentContainer.viewContext.execute(deleteReqest)
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
+    func deleteAllCellsFromTable() {
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+
+        app.navigationBars["Rates & converter"].buttons["Edit"].tap()
+
+        let predicate = NSPredicate(format: "isHittable == true")
+        expectation(for: predicate, evaluatedWith: app.tables.firstMatch)
+        waitForExpectations(timeout: 2)
+
+
+        while app.tables.children(matching: .cell).count > 0 {
+            let deleteButton = tablesQuery.children(matching: .cell).element(boundBy: 0).buttons["Delete "]
+
+            let predicate = NSPredicate(format: "isEnabled == true")
+            expectation(for: predicate, evaluatedWith: deleteButton)
+            waitForExpectations(timeout: 2)
+
+            deleteButton.tap()
+
+            let deleteButton2 = tablesQuery.children(matching: .cell).element(boundBy: 0).buttons["trailing0"]
+            deleteButton2.tap()
+        }
+
+        app.navigationBars["Rates & converter"].buttons["Done"].tap()
+    }
+
 }

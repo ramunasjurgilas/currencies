@@ -39,7 +39,9 @@ extension Collection where Element == CurrencyPair, Index == Int {
     func update(rates: [String: Double], from managedObjectContext: NSManagedObjectContext) {
         
         self.forEach {
-            if let exchangeRate = rates[$0.pair!] {
+
+            if let pair = $0.pair,
+                let exchangeRate = rates[pair] {
                 $0.exchangeRate = exchangeRate
             }
         }

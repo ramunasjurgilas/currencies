@@ -28,6 +28,7 @@ struct CurrencyPairRowView: View {
             VStack(alignment: .trailing) {
                 Text(model.secondCurrencyTitle(with: value))
                     .font(.title)
+                    .accessibility(label: Text("rate"))
                 Text(model.secondCurrencySubtitle)
                     .font(.footnote)
                     .foregroundColor(.gray)
