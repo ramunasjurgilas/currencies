@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@testable import currencies_xr
 
 class CoreDataTestsHelper {
     static let shared = CoreDataTestsHelper()
@@ -38,4 +39,38 @@ class CoreDataTestsHelper {
         })
         return container
     }()
+
+    func currencyPairs() -> [CurrencyPair]? {
+        let fetchRequest: NSFetchRequest<CurrencyPair> = CurrencyPair.fetchRequest()
+        return try? persistentContainer.viewContext.fetch(fetchRequest)
+    }
+
+    func clean() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CurrencyPair.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let ddd = try? persistentContainer.viewContext.fetch(fetchRequest)
+        _ = try? persistentContainer.viewContext.execute(deleteRequest)
+        do {
+        try persistentContainer.viewContext.save()
+        } catch let error {
+            print("Error on cleaning", error)
+        }
+
+//        let fetchRequest: NSFetchRequest<CurrencyPair> = CurrencyPair.fetchRequest()
+        let dd = try? persistentContainer.viewContext.fetch(fetchRequest)
+
+    }
+
+    func clearCoreDataStore() {
+        let entities = persistentContainer.managedObjectModel.entities
+        for entity in entities {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
+            let deleteReqest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            do {
+                try persistentContainer.viewContext.execute(deleteReqest)
+            } catch {
+                print(error)
+            }
+        }
+    }
 }

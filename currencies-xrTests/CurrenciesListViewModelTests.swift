@@ -77,8 +77,9 @@ class CurrenciesListViewModelTests: XCTestCase {
         model.set(currency: "LTU")
         model.save(in: context)
 
-        XCTAssertEqual(pairs.count + 1, currencyPairs(in: context)!.count)
-        XCTAssertTrue(pairs.contains { $0.pair == "GBPLTU" })
+        let pairsAfterSave = currencyPairs(in: context)!
+        XCTAssertEqual(pairs.count + 1, pairsAfterSave.count)
+        XCTAssertTrue(pairsAfterSave.contains { $0.pair == "GBPLTU" })
     }
 
 
@@ -97,7 +98,7 @@ class CurrenciesListViewModelTests: XCTestCase {
         XCTAssertFalse(model.shouldDisableButtonFor(currency: "LTU"))
     }
 
-    private func currencyPairs(in context: NSManagedObjectContext) -> [CurrencyPair]? {
+    func currencyPairs(in context: NSManagedObjectContext) -> [CurrencyPair]? {
         let fetchRequest: NSFetchRequest<CurrencyPair> = CurrencyPair.fetchRequest()
         return try? context.fetch(fetchRequest)
     }

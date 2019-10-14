@@ -42,6 +42,22 @@ class CurrencyPairTests: XCTestCase {
         XCTAssertEqual(currencyPair.valueAfterExchange(with: 1500), 1142.7)
     }
 
+    func testDelete() {
+        CoreDataTestsHelper.shared.clearCoreDataStore()
+        let context = CoreDataTestsHelper.shared.persistentContainer.viewContext
+        CurrencyPair.create(in: context, pair: "LTUGBP")
+        CurrencyPair.create(in: context, pair: "XXXXXX")
+        CurrencyPair.create(in: context, pair: "LTUERU")
+
+        let pairs = CoreDataTestsHelper.shared.currencyPairs()
+        let index = pairs?.lastIndex(where: { (pair) -> Bool in
+            pair.pair == "XXXXXX"
+        })
+        pairs?.delete(at: [index!], from: context)
+
+        let pairsAfterDeletion = CoreDataTestsHelper.shared.currencyPairs()
+        XCTAssertNil(pairsAfterDeletion?.first { $0.pair == "XXXXXX" } )
+    }
 
     static func currencyPair(with pair: String, exchangeRate: Double = 0) -> CurrencyPair {
         let context = CoreDataTestsHelper.shared.persistentContainer.viewContext
