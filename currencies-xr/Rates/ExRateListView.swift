@@ -40,7 +40,7 @@ struct ExRateListView: View {
                     VStack(alignment: .center) {
                         TextField("placeholder_enter_amount", text: self.$amount)
                             .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.center)
                     }
 
 
@@ -50,15 +50,12 @@ struct ExRateListView: View {
                         }.onDelete { indices in
                             self.currencyPairs.delete(at: indices, from: self.viewContext)
                         }
-                        }
+                    }
                     .onAppear {
                         self.model.start()
                     }
                     .onDisappear {
                         self.model.stop()
-                    }
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
                 } else {
                     VStack(alignment: .center) {
